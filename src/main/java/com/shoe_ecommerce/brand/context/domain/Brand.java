@@ -9,7 +9,7 @@ public class Brand {
     private final BrandName name;
     private final BrandAbout about;
     private final BrandJoinedAt joinedAt;
-    private final BrandPicture picture;
+    private final BrandLogo logo;
     private final BrandBanner banner;
 
     public Brand(
@@ -17,14 +17,14 @@ public class Brand {
             BrandName name,
             BrandAbout about,
             BrandJoinedAt joinedAt,
-            BrandPicture picture,
+            BrandLogo logo,
             BrandBanner banner
     ) {
         this.id = id;
         this.name = name;
         this.about = about;
         this.joinedAt = joinedAt;
-        this.picture = picture;
+        this.logo = logo;
         this.banner = banner;
     }
 
@@ -32,10 +32,10 @@ public class Brand {
             BrandId id,
             BrandName name,
             BrandAbout about,
-            BrandPicture picture,
+            BrandLogo logo,
             BrandBanner banner
     ) {
-        Brand brand = new Brand(id, name, about, new BrandJoinedAt(), picture, banner);
+        Brand brand = new Brand(id, name, about, new BrandJoinedAt(), logo, banner);
         return brand;
     }
 
@@ -55,8 +55,8 @@ public class Brand {
         return joinedAt;
     }
 
-    public BrandPicture picture() {
-        return picture;
+    public BrandLogo logo() {
+        return logo;
     }
 
     public BrandBanner banner() {
@@ -74,12 +74,12 @@ public class Brand {
                 name.equals(brand.name) &&
                 about.equals(brand.about) &&
                 joinedAt.equals(brand.joinedAt) &&
-                picture.equals(brand.picture) &&
+                logo.equals(brand.logo) &&
                 banner.equals(brand.banner);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, about, joinedAt, picture, banner);
+        return Objects.hash(id, name, about, joinedAt, logo, banner);
     }
 }

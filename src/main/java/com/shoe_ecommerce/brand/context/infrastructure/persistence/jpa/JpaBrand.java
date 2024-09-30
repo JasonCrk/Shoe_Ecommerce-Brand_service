@@ -35,8 +35,8 @@ public class JpaBrand {
     @Column(name = "about", columnDefinition = "TEXT", nullable = false)
     private String about;
 
-    @Column(name = "picture", columnDefinition = "TINYTEXT", nullable = false)
-    private String picture;
+    @Column(name = "logo", columnDefinition = "TINYTEXT", nullable = false)
+    private String logo;
 
     @Column(name = "banner", columnDefinition = "TINYTEXT", nullable = false)
     private String banner;
