@@ -7,4 +7,8 @@ public final class BrandAbout extends StringValueObject {
     public BrandAbout(String value) {
         super(value);
     }
+
+    public BrandAbout() {
+        super(null);
+    }
 }

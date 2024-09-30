@@ -7,4 +7,8 @@ public final class BrandBanner extends ImageUrlValueObject {
     public BrandBanner(String value) {
         super(value);
     }
+
+    public BrandBanner() {
+        super(null);
+    }
 }

@@ -7,4 +7,8 @@ public final class BrandLogo extends ImageUrlValueObject {
     public BrandLogo(String value) {
         super(value);
     }
+
+    public BrandLogo() {
+        super(null);
+    }
 }
