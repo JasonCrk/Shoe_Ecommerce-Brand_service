@@ -95,6 +95,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.azure.spring</groupId>
+			<artifactId>spring-cloud-azure-testcontainers</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit-test</artifactId>
 			<scope>test</scope>
