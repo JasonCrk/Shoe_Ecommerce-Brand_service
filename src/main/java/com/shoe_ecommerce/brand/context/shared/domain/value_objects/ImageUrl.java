@@ -2,9 +2,9 @@ package com.shoe_ecommerce.brand.context.shared.domain.value_objects;
 
 import com.shoe_ecommerce.brand.shared.domain.value_objects.StringValueObject;
 
-public class ImageUrlValueObject extends StringValueObject {
+public class ImageUrl extends StringValueObject {
 
-    public ImageUrlValueObject(String value) {
+    public ImageUrl(String value) {
         super(ensureIsValid(value));
     }
 
