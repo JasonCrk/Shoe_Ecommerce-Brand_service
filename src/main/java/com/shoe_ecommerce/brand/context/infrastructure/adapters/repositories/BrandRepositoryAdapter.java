@@ -3,8 +3,8 @@ package com.shoe_ecommerce.brand.context.infrastructure.adapters.repositories;
 import com.shoe_ecommerce.brand.context.domain.Brand;
 import com.shoe_ecommerce.brand.context.domain.ports.repositories.BrandRepository;
 import com.shoe_ecommerce.brand.context.domain.value_objects.BrandId;
-import com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa.BrandMapper;
-import com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa.JpaBrandRepository;
+import com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa.mappers.BrandMapper;
+import com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa.repositories.JpaBrandRepository;
 
 import com.shoe_ecommerce.brand.shared.domain.Service;
 
