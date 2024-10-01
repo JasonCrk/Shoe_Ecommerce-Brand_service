@@ -2,10 +2,13 @@ package com.shoe_ecommerce.brand.context.infrastructure.adapters.repositories;
 
 import com.shoe_ecommerce.brand.context.domain.Brand;
 import com.shoe_ecommerce.brand.context.domain.ports.repositories.BrandRepository;
+import com.shoe_ecommerce.brand.context.domain.value_objects.BrandId;
 import com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa.BrandMapper;
 import com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa.JpaBrandRepository;
 
 import com.shoe_ecommerce.brand.shared.domain.Service;
+
+import java.util.UUID;
 
 @Service
 public class BrandRepositoryAdapter implements BrandRepository {
@@ -19,5 +22,15 @@ public class BrandRepositoryAdapter implements BrandRepository {
     @Override
     public Brand save(Brand brand) {
         return BrandMapper.toEntity(this.repository.save(BrandMapper.toModel(brand)));
+    }
+
+    @Override
+    public boolean existsById(BrandId id) {
+        return repository.existsById(UUID.fromString(id.value()));
+    }
+
+    @Override
+    public void deleteById(BrandId id) {
+        repository.deleteById(UUID.fromString(id.value()));
     }
 }
