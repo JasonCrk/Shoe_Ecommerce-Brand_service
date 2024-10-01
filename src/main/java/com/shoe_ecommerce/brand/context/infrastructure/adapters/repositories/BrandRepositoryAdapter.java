@@ -8,6 +8,7 @@ import com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa.JpaBrandR
 
 import com.shoe_ecommerce.brand.shared.domain.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -22,6 +23,11 @@ public class BrandRepositoryAdapter implements BrandRepository {
     @Override
     public Brand save(Brand brand) {
         return BrandMapper.toEntity(this.repository.save(BrandMapper.toModel(brand)));
+    }
+
+    @Override
+    public Optional<Brand> findById(BrandId id) {
+        return repository.findById(UUID.fromString(id.value())).map(BrandMapper::toEntity);
     }
 
     @Override
