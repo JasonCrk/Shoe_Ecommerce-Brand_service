@@ -60,5 +60,7 @@ public final class BrandEditor {
                 throw new CommandHandlerExecutionError(e);
             }
         }
+
+        this.brandRepository.save(brand);
     }
 }
