@@ -5,17 +5,17 @@ import com.shoe_ecommerce.brand.context.shared.domain.value_objects.UserId;
 
 import java.util.Objects;
 
-public final class FollowBrand {
+public final class BrandFollower {
     private final BrandId brandId;
     private final UserId userId;
 
-    public FollowBrand(BrandId brandId, UserId userId) {
+    public BrandFollower(BrandId brandId, UserId userId) {
         this.brandId = brandId;
         this.userId = userId;
     }
 
-    public static FollowBrand create(BrandId brandId, UserId userId) {
-        FollowBrand follow = new FollowBrand(brandId, userId);
+    public static BrandFollower create(BrandId brandId, UserId userId) {
+        BrandFollower follow = new BrandFollower(brandId, userId);
         return follow;
     }
 
@@ -33,7 +33,7 @@ public final class FollowBrand {
 
         if (object == null || getClass() != object.getClass()) return false;
 
-        FollowBrand that = (FollowBrand) object;
+        BrandFollower that = (BrandFollower) object;
         return brandId.equals(that.brandId) &&
                 userId.equals(that.userId);
     }
