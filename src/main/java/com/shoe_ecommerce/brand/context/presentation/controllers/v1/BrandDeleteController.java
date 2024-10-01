@@ -5,6 +5,9 @@ import com.shoe_ecommerce.brand.shared.domain.bus.command.CommandBus;
 import com.shoe_ecommerce.brand.shared.domain.bus.query.QueryBus;
 import com.shoe_ecommerce.brand.shared.infrastructure.RestApiController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+@Tag(name = "DELETEs")
 @RestController
 @RequestMapping("/api/v1/brands")
 public final class BrandDeleteController extends RestApiController {
@@ -22,6 +26,7 @@ public final class BrandDeleteController extends RestApiController {
         super(commandBus, queryBus);
     }
 
+    @Operation(operationId = "Delete brand")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> index(@PathVariable("id") UUID id) {
         this.dispatch(new DeleteBrandCommand(id.toString()));

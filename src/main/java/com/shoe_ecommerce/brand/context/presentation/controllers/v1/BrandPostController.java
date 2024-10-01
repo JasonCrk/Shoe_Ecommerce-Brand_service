@@ -9,6 +9,9 @@ import com.shoe_ecommerce.brand.shared.domain.bus.query.QueryBus;
 import com.shoe_ecommerce.brand.shared.infrastructure.MediaFileAdapter;
 import com.shoe_ecommerce.brand.shared.infrastructure.RestApiController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "POSTs")
 @RestController
 @RequestMapping("/api/v1/brands")
 public final class BrandPostController extends RestApiController {
@@ -28,6 +32,7 @@ public final class BrandPostController extends RestApiController {
         this.uuidGenerator = uuidGenerator;
     }
 
+    @Operation(operationId = "Create brand")
     @PostMapping
     public ResponseEntity<String> create(@Valid CreateBrandRequest request) {
         this.<Void>dispatch(new CreateBrandCommand(
