@@ -1,7 +1,10 @@
 package com.shoe_ecommerce.brand.context.presentation.controllers.v1;
 
 import com.shoe_ecommerce.brand.context.application.commands.create.CreateBrandCommand;
+import com.shoe_ecommerce.brand.context.application.commands.follow.FollowBrandCommand;
 import com.shoe_ecommerce.brand.context.presentation.requests.CreateBrandRequest;
+
+import com.shoe_ecommerce.brand.context.shared.domain.AuthUser;
 
 import com.shoe_ecommerce.brand.shared.domain.UuidGenerator;
 import com.shoe_ecommerce.brand.shared.domain.bus.command.CommandBus;
@@ -16,9 +19,9 @@ import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Tag(name = "POSTs")
 @RestController
@@ -44,5 +47,15 @@ public final class BrandPostController extends RestApiController {
         ));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @Operation(operationId = "Follow and unfollow brand")
+    @PostMapping("/{id}/follow")
+    public ResponseEntity<String> follow(
+            @PathVariable("id") UUID brandId,
+            @RequestAttribute("user") AuthUser user
+    ) {
+        this.dispatch(new FollowBrandCommand(user.id(), brandId.toString()));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
