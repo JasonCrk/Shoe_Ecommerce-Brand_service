@@ -6,11 +6,11 @@ import java.util.Objects;
 
 public class Brand {
     private final BrandId id;
-    private final BrandName name;
-    private final BrandAbout about;
+    private BrandName name;
+    private BrandAbout about;
+    private BrandLogo logo;
+    private BrandBanner banner;
     private final BrandJoinedAt joinedAt;
-    private final BrandLogo logo;
-    private final BrandBanner banner;
 
     public Brand(
             BrandId id,
@@ -61,6 +61,22 @@ public class Brand {
 
     public BrandBanner banner() {
         return banner;
+    }
+
+    public void updateName(BrandName name) {
+        this.name = name;
+    }
+
+    public void updateAbout(BrandAbout about) {
+        this.about = about;
+    }
+
+    public void updateLogo(BrandLogo logo) {
+        this.logo = logo;
+    }
+
+    public void updateBanner(BrandBanner banner) {
+        this.banner = banner;
     }
 
     @Override
