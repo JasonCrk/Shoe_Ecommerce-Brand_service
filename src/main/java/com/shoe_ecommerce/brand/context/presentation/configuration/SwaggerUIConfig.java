@@ -1,4 +1,4 @@
-package com.shoe_ecommerce.brand.context.infrastructure.configuration;
+package com.shoe_ecommerce.brand.context.presentation.configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
