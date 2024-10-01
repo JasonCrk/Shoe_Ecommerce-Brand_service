@@ -4,7 +4,7 @@ import com.shoe_ecommerce.brand.context.domain.value_objects.*;
 
 import java.util.Objects;
 
-public class Brand {
+public final class Brand {
     private final BrandId id;
     private BrandName name;
     private BrandAbout about;
