@@ -1,4 +1,4 @@
-package com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa;
+package com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa.models;
 
 import jakarta.persistence.*;
 

@@ -1,7 +1,8 @@
-package com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa;
+package com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa.mappers;
 
 import com.shoe_ecommerce.brand.context.domain.Brand;
 import com.shoe_ecommerce.brand.context.domain.value_objects.*;
+import com.shoe_ecommerce.brand.context.infrastructure.persistence.jpa.models.JpaBrand;
 
 import java.util.UUID;
 
