@@ -15,10 +15,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -33,12 +30,14 @@ public final class BrandPatchController extends RestApiController {
 
     @Operation(operationId = "Edit brand")
     @PatchMapping("/{id}")
-    public ResponseEntity<String> index(
+    public ResponseEntity<String> update(
             @PathVariable("id") UUID id,
-            @Valid UpdateBrandRequest request
+            @Valid UpdateBrandRequest request,
+            @RequestHeader("X-User-Associated-Brand-Id") String associatedBrandId
     ) {
         this.dispatch(new UpdateBrandCommand(
                 id.toString(),
+                associatedBrandId,
                 request.name(),
                 request.about(),
                 request.logo() == null ? null : new MediaFileAdapter(request.banner()),

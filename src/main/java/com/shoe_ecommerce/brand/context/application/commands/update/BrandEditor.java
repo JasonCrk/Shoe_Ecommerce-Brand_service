@@ -6,6 +6,8 @@ import com.shoe_ecommerce.brand.context.domain.ports.repositories.BrandRepositor
 import com.shoe_ecommerce.brand.context.domain.ports.services.storage.BlobStorageService;
 import com.shoe_ecommerce.brand.context.domain.value_objects.*;
 
+import com.shoe_ecommerce.brand.context.shared.domain.exceptions.UnauthorizedAssociatedBrand;
+
 import com.shoe_ecommerce.brand.shared.domain.MediaFile;
 import com.shoe_ecommerce.brand.shared.domain.Service;
 import com.shoe_ecommerce.brand.shared.domain.bus.command.CommandHandlerExecutionError;
@@ -26,13 +28,15 @@ public final class BrandEditor {
 
     public void edit(
             BrandId id,
+            BrandId associatedBrandId,
             BrandName name,
             BrandAbout about,
             MediaFile logo,
             MediaFile banner
     ) {
-        Optional<Brand> foundBrand = brandRepository.findById(id);
+        if (!associatedBrandId.equals(id)) throw new UnauthorizedAssociatedBrand(id);
 
+        Optional<Brand> foundBrand = brandRepository.findById(id);
         if (foundBrand.isEmpty()) throw new BrandNotExist(id);
 
         Brand brand = foundBrand.get();

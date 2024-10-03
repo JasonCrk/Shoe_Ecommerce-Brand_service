@@ -20,6 +20,7 @@ public final class UpdateBrandCommandHandler implements CommandHandler<UpdateBra
     public Void handle(UpdateBrandCommand command) {
         this.editor.edit(
                 new BrandId(command.id()),
+                new BrandId(command.associatedBrandId()),
                 new BrandName(command.name()),
                 new BrandAbout(command.about()),
                 command.logo(),

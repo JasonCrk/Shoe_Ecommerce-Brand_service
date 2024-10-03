@@ -5,6 +5,7 @@ import com.shoe_ecommerce.brand.shared.domain.bus.command.Command;
 
 public record UpdateBrandCommand(
         String id,
+        String associatedBrandId,
         String name,
         String about,
         MediaFile logo,
