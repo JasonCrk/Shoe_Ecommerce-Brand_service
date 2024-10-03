@@ -4,8 +4,6 @@ import com.shoe_ecommerce.brand.context.application.commands.create.CreateBrandC
 import com.shoe_ecommerce.brand.context.application.commands.follow.FollowBrandCommand;
 import com.shoe_ecommerce.brand.context.presentation.requests.CreateBrandRequest;
 
-import com.shoe_ecommerce.brand.context.shared.domain.AuthUser;
-
 import com.shoe_ecommerce.brand.shared.domain.UuidGenerator;
 import com.shoe_ecommerce.brand.shared.domain.bus.command.CommandBus;
 import com.shoe_ecommerce.brand.shared.domain.bus.query.QueryBus;
@@ -53,9 +51,9 @@ public final class BrandPostController extends RestApiController {
     @PostMapping("/{id}/follow")
     public ResponseEntity<String> follow(
             @PathVariable("id") UUID brandId,
-            @RequestAttribute("user") AuthUser user
+            @RequestHeader("X-User-Id") String userId
     ) {
-        this.dispatch(new FollowBrandCommand(user.id(), brandId.toString()));
+        this.dispatch(new FollowBrandCommand(userId, brandId.toString()));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
