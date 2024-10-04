@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public final class SwaggerUIConfig {
 
     @Bean
-    public OpenAPI workflowServiceOpenAPI() {
+    public OpenAPI openApiConfig() {
         return new OpenAPI()
                 .info(new Info()
                         .title("Shoe E-commerce - Brand service")
