@@ -9,7 +9,7 @@ import java.util.UUID;
 public class JavaUuidGenerator implements UuidGenerator {
 
     @Override
-    public UUID generate() {
-        return UUID.randomUUID();
+    public String generate() {
+        return UUID.randomUUID().toString();
     }
 }

@@ -9,10 +9,10 @@ import com.shoe_ecommerce.brand.context.domain.ports.services.storage.BlobStorag
 import com.shoe_ecommerce.brand.shared.domain.MediaFile;
 import com.shoe_ecommerce.brand.shared.domain.Service;
 
+import com.shoe_ecommerce.brand.shared.domain.UuidGenerator;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
-import java.util.UUID;
 
 @Service
 public class BlobStorageServiceAdapter implements BlobStorageService {
@@ -24,9 +24,11 @@ public class BlobStorageServiceAdapter implements BlobStorageService {
     public String blobStorageBrandBannerContainer;
 
     private final BlobServiceClient blobServiceClient;
+    private final UuidGenerator uuidGenerator;
 
-    public BlobStorageServiceAdapter(BlobServiceClient blobServiceClient) {
+    public BlobStorageServiceAdapter(BlobServiceClient blobServiceClient, UuidGenerator uuidGenerator) {
         this.blobServiceClient = blobServiceClient;
+        this.uuidGenerator = uuidGenerator;
     }
 
     @Override
@@ -43,7 +45,7 @@ public class BlobStorageServiceAdapter implements BlobStorageService {
         String[] filenameSplit = mediaFile.getOriginalFilename().split("\\.");
         String mediaFileExtension = filenameSplit[filenameSplit.length - 1];
 
-        String blobFilename = UUID.randomUUID() + "." + mediaFileExtension;
+        String blobFilename = uuidGenerator.generate() + "." + mediaFileExtension;
 
         BlobClient blobClient = blobServiceClient
                 .getBlobContainerClient(blobStorageContainer)

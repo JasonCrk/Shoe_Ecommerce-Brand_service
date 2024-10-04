@@ -37,7 +37,7 @@ public final class BrandPostController extends RestApiController {
     @PostMapping
     public ResponseEntity<String> create(@Valid CreateBrandRequest request) {
         this.<Void>dispatch(new CreateBrandCommand(
-                uuidGenerator.generate().toString(),
+                uuidGenerator.generate(),
                 request.name(),
                 request.about(),
                 new MediaFileAdapter(request.logo()),
