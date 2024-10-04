@@ -7,6 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public final class MaxFileSizeValidator implements ConstraintValidator<MaxFileSize, MultipartFile> {
 
+    private static final long KILOBYTE = 1048576L;
+
     private int maxMegabytes;
 
     @Override
@@ -20,7 +22,7 @@ public final class MaxFileSizeValidator implements ConstraintValidator<MaxFileSi
     public boolean isValid(MultipartFile multipartFile, ConstraintValidatorContext constraintValidatorContext) {
         if (multipartFile == null) return true;
 
-        if (multipartFile.getSize() > maxMegabytes * 1048576L) {
+        if (multipartFile.getSize() > maxMegabytes * KILOBYTE) {
             constraintValidatorContext.disableDefaultConstraintViolation();
             constraintValidatorContext.buildConstraintViolationWithTemplate("File size must be " + maxMegabytes + "MB or less")
                     .addConstraintViolation();
