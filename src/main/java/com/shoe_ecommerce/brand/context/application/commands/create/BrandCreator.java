@@ -2,14 +2,14 @@ package com.shoe_ecommerce.brand.context.application.commands.create;
 
 import com.shoe_ecommerce.brand.context.domain.Brand;
 import com.shoe_ecommerce.brand.context.domain.ports.repositories.BrandRepository;
-import com.shoe_ecommerce.brand.context.domain.ports.services.storage.BlobStorageService;
 import com.shoe_ecommerce.brand.context.domain.value_objects.*;
+
+import com.shoe_ecommerce.brand.context.shared.domain.ports.storage.BlobStorageService;
 
 import com.shoe_ecommerce.brand.shared.domain.MediaFile;
 import com.shoe_ecommerce.brand.shared.domain.Service;
-import com.shoe_ecommerce.brand.shared.domain.bus.query.QueryHandlerExecutionError;
 
-import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public final class BrandCreator {
@@ -26,29 +26,21 @@ public final class BrandCreator {
             BrandId id,
             BrandName name,
             BrandAbout about,
-            MediaFile logoMediaFile,
-            MediaFile bannerMediaFile
+            Optional<MediaFile> logoMediaFile,
+            Optional<MediaFile> bannerMediaFile
     ) {
-        BrandBanner banner = new BrandBanner();
-        BrandLogo logo = new BrandLogo();
+        BrandBanner uploadedBanner = new BrandBanner();
+        BrandLogo uploadedLogo = new BrandLogo();
 
-        if (logoMediaFile != null) {
-            try {
-                logo = new BrandLogo(this.storageService.uploadLogo(logoMediaFile).blobUrl());
-            } catch (IOException e) {
-                throw new QueryHandlerExecutionError(e);
-            }
-        }
+        var fileUploads = this.storageService.uploadLogoAndBannerInParallel(logoMediaFile, bannerMediaFile);
 
-        if (bannerMediaFile != null) {
-            try {
-                banner = new BrandBanner(this.storageService.uploadBanner(bannerMediaFile).blobUrl());
-            } catch (IOException e) {
-                throw new QueryHandlerExecutionError(e);
-            }
-        }
+        if (fileUploads.containsKey("logo"))
+            uploadedLogo = new BrandLogo(fileUploads.get("logo").blobUrl());
 
-        Brand brand = Brand.create(id, name, about, logo, banner);
+        if (fileUploads.containsKey("banner"))
+            uploadedBanner = new BrandBanner(fileUploads.get("banner").blobUrl());
+
+        Brand brand = Brand.create(id, name, about, uploadedLogo, uploadedBanner);
         this.brandRepository.save(brand);
     }
 }

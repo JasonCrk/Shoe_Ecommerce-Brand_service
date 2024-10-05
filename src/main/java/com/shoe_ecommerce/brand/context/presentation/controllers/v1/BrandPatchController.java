@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Tag(name = "PATCHs")
@@ -40,8 +41,8 @@ public final class BrandPatchController extends RestApiController {
                 associatedBrandId,
                 request.name(),
                 request.about(),
-                request.logo() == null ? null : new MediaFileAdapter(request.banner()),
-                request.banner() == null ? null : new MediaFileAdapter(request.banner())
+                Optional.of(request.logo()).map(MediaFileAdapter::new),
+                Optional.of(request.banner()).map(MediaFileAdapter::new)
         ));
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

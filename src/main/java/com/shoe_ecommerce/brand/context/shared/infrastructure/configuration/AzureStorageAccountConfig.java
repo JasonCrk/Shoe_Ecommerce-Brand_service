@@ -1,4 +1,4 @@
-package com.shoe_ecommerce.brand.context.infrastructure.configuration;
+package com.shoe_ecommerce.brand.context.shared.infrastructure.configuration;
 
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;

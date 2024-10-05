@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Tag(name = "POSTs")
@@ -40,8 +41,8 @@ public final class BrandPostController extends RestApiController {
                 uuidGenerator.generate(),
                 request.name(),
                 request.about(),
-                new MediaFileAdapter(request.logo()),
-                new MediaFileAdapter(request.banner())
+                Optional.of(request.logo()).map(MediaFileAdapter::new),
+                Optional.of(request.banner()).map(MediaFileAdapter::new)
         ));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
